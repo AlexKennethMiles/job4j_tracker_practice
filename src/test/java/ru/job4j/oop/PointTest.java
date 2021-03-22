@@ -1,9 +1,9 @@
 package ru.job4j.oop;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.number.IsCloseTo.closeTo;
 import static org.junit.Assert.*;
 
 public class PointTest {
@@ -32,5 +32,13 @@ public class PointTest {
         double dist = a.distance(b);
         double expected = 10;
         assertThat(expected, is(dist));
+    }
+
+    @Test
+    public void dist11() {
+        Point a = new Point(0, 0, 0);
+        Point b = new Point(5, 5, 5);
+        double dist = a.distance3d(b);
+        assertThat(dist, closeTo(8.660, 0.001));
     }
 }
