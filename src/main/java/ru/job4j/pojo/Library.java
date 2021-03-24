@@ -25,7 +25,7 @@ public class Library {
         }
         System.out.println("===");
         for (int i = 0; i < data.length; i++) {
-            if (data[i].getName().equals("Clean code")) {
+            if ("Clean code".equals(data[i].getName())) {
                 System.out.println("In \"" + data[i].getName() + "\" "
                         + data[i].getNumberOfPages() + " pages.");
             }
