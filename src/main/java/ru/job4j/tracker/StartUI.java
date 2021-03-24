@@ -10,7 +10,7 @@ public class StartUI {
         System.out.println(currentDateFormat);*/
         Tracker tracker = new Tracker();
         tracker.add(item);
-        System.out.println(tracker.findById(1));
-
+//        System.out.println(tracker.findById(1));
+        System.out.println(item.toString());
     }
 }
