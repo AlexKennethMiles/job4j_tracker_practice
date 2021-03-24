@@ -7,13 +7,28 @@ public class Tracker {
     private int ids = 1;
     private int size = 0;
 
+    public boolean delete(int id) {
+        int index = indexOf(id);
+        if (index != -1) {
+            int start = index + 1;
+            int distPos = index;
+            int length = size - index;
+            System.arraycopy(items, start, items, distPos, length);
+            items[size - 1] = null;
+            size--;
+            return true;
+        }
+        return false;
+    }
+
     public boolean replace(int id, Item item) {
         int index = indexOf(id);
         if (index != -1) {
             item.setId(items[index].getId());
             items[index] = item;
+            return true;
         }
-        return index != -1;
+        return false;
     }
 
     private int indexOf(int id) {
