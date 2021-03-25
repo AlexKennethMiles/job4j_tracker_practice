@@ -4,9 +4,8 @@ public class Builder extends Engineer {
     private String riskClass;
 
     public Builder(String name, String surname, String education,
-                   String birthday, String experience, String post,
-                   String specialization, String riskClass) {
-        super(name, surname, education, birthday, experience, post, specialization);
+                   String birthday, String riskClass) {
+        super(name, surname, education, birthday);
         this.riskClass = riskClass;
     }
 
