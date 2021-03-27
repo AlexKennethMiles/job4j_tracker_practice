@@ -51,8 +51,9 @@ public class StartUI {
                     System.out.println("==== Searching for item by id ====");
                     System.out.print("Enter the ID of the item: ");
                     id = Integer.parseInt(scanner.nextLine());
-                    if (tracker.findById(id) != null) {
-                        item = tracker.findById(id);
+                    Item required = tracker.findById(id);
+                    if (required != null) {
+                        item = required;
                         System.out.println(item);
                     } else {
                         System.out.println("!!! Item by id NOT found !!!");
@@ -62,8 +63,8 @@ public class StartUI {
                     System.out.println("==== Searching for item by name ====");
                     System.out.print("Enter the name of the item: ");
                     name = scanner.nextLine();
-                    if (tracker.findByName(name) != null) {
-                        Item[] items = tracker.findByName(name);
+                    Item[] items = tracker.findByName(name);
+                    if (items.length != 0) {
                         for (Item elem : items) {
                             System.out.println(elem);
                         }
