@@ -2,8 +2,8 @@ package ru.job4j.tracker;
 
 public class StartUI {
     public static void createItem(Input input, Tracker tracker) {
-        String msg = "==== Creating a new Item ====" + System.lineSeparator()
-                + "Enter Item's name: ";
+        System.out.println("==== Creating a new Item ====");
+        String msg = "Enter Item's name: ";
         String name = input.askStr(msg);
         Item item = new Item(name);
         tracker.add(item);
@@ -18,8 +18,8 @@ public class StartUI {
     }
 
     private static void editItem(Input input, Tracker tracker) {
-        String msg = "==== Changing the item ====" + System.lineSeparator()
-                + "Enter the ID of the item: ";
+        System.out.println("==== Changing the item ====");
+        String msg = "Enter the ID of the item: ";
         int id = input.askInt(msg);
         String name = input.askStr("Enter a new element name: ");
         Item item = new Item(name);
@@ -31,8 +31,8 @@ public class StartUI {
     }
 
     private static void deteleItem(Input input, Tracker tracker) {
-        String msg = "==== Deleting the item ====" + System.lineSeparator()
-                + "Enter the ID of the item: ";
+        System.out.println("==== Deleting the item ====");
+        String msg = "Enter the ID of the item: ";
         int id = input.askInt(msg);
         if (tracker.delete(id)) {
             System.out.println("+++ The deletion was successful +++");
@@ -42,8 +42,8 @@ public class StartUI {
     }
 
     public static void searchByID(Input input, Tracker tracker) {
-        String msg = "==== Searching for item by id ====" + System.lineSeparator()
-                + "Enter the ID of the item: ";
+        System.out.println("==== Searching for item by id ====");
+        String msg = "Enter the ID of the item: ";
         int id = input.askInt(msg);
         Item required = tracker.findById(id);
         if (required != null) {
@@ -54,8 +54,8 @@ public class StartUI {
     }
 
     public static void searchByName(Input input, Tracker tracker) {
-        String msg = "==== Searching for item by name ====" + System.lineSeparator()
-                + "Enter the name of the item: ";
+        System.out.println("==== Searching for item by name ====");
+        String msg = "Enter the name of the item: ";
         String name = input.askStr(msg);
         Item[] items = tracker.findByName(name);
         if (items.length != 0) {
