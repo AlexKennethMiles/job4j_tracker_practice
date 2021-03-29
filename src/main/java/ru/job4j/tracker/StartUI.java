@@ -17,8 +17,8 @@ public class StartUI {
         }
     }
 
-    private static void editItem(Input input, Tracker tracker) {
-        System.out.println("==== Changing the item ====");
+    public static void replaceItem(Input input, Tracker tracker) {
+        System.out.println("==== Update the item ====");
         String msg = "Enter the ID of the item: ";
         int id = input.askInt(msg);
         String name = input.askStr("Enter a new element name: ");
@@ -30,7 +30,7 @@ public class StartUI {
         }
     }
 
-    private static void deteleItem(Input input, Tracker tracker) {
+    public static void deleteItem(Input input, Tracker tracker) {
         System.out.println("==== Deleting the item ====");
         String msg = "Enter the ID of the item: ";
         int id = input.askInt(msg);
@@ -75,8 +75,8 @@ public class StartUI {
             switch (select) {
                 case (0) -> StartUI.createItem(input, tracker);
                 case (1) -> StartUI.showAllItems(tracker);
-                case (2) -> StartUI.editItem(input, tracker);
-                case (3) -> StartUI.deteleItem(input, tracker);
+                case (2) -> StartUI.replaceItem(input, tracker);
+                case (3) -> StartUI.deleteItem(input, tracker);
                 case (4) -> StartUI.searchByID(input, tracker);
                 case (5) -> StartUI.searchByName(input, tracker);
                 case (6) -> {
