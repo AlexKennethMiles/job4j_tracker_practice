@@ -6,6 +6,10 @@ public class StartUI {
         while (run) {
             this.showMenu(actions);
             int select = input.askInt("Select: ");
+            while (select < 0 || select > 6) {
+                System.out.println("!!!! Error! Incorrect menu item selected! !!!!");
+                select = input.askInt("Select: ");
+            }
             UserAction action = actions[select];
             run = action.execute(input, tracker);
         }
