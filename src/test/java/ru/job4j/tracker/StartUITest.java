@@ -108,4 +108,98 @@ public class StartUITest {
                         "0. Exit" + System.lineSeparator()
         ));
     }
+
+    @Test
+    public void whenSearchAll() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[]{"0", "First item", "0", "Second item", "1", "2"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new CreateAction(out),
+                new ShowAllItems(),
+                new ExitAction()
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String nxL = System.lineSeparator();
+        assertThat(out.toString(), is(
+                "Menu." + nxL +
+                        "0. Create a new item" + nxL +
+                        "1. Show all items" + nxL +
+                        "2. Exit" + nxL +
+                        "Menu." + nxL +
+                        "0. Create a new item" + nxL +
+                        "1. Show all items" + nxL +
+                        "2. Exit" + nxL +
+                        "Menu." + nxL +
+                        "0. Create a new item" + nxL +
+                        "1. Show all items" + nxL +
+                        "2. Exit" + nxL +
+                        "Menu." + nxL +
+                        "0. Create a new item" + nxL +
+                        "1. Show all items" + nxL +
+                        "2. Exit" + nxL
+        ));
+    }
+
+    @Test
+    public void whenSearchByName() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[]{"0", "New item", "1", "New item", "2"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new CreateAction(out),
+                new SearchByName(),
+                new ExitAction()
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String nxL = System.lineSeparator();
+        assertThat(out.toString(), is(
+                "Menu." + nxL +
+                        "0. Create a new item" + nxL +
+                        "1. Find items by name" + nxL +
+                        "2. Exit" + nxL +
+                        "Menu." + nxL +
+                        "0. Create a new item" + nxL +
+                        "1. Find items by name" + nxL +
+                        "2. Exit" + nxL +
+                        "Menu." + nxL +
+                        "0. Create a new item" + nxL +
+                        "1. Find items by name" + nxL +
+                        "2. Exit" + nxL
+        ));
+    }
+
+    @Test
+    public void whenSearchById() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[]{"0", "New item", "1", "1", "2"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new CreateAction(out),
+                new SearchByID(),
+                new ExitAction()
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String nxL = System.lineSeparator();
+        assertThat(out.toString(), is(
+                "Menu." + nxL +
+                        "0. Create a new item" + nxL +
+                        "1. Find item by Id" + nxL +
+                        "2. Exit" + nxL +
+                        "Menu." + nxL +
+                        "0. Create a new item" + nxL +
+                        "1. Find item by Id" + nxL +
+                        "2. Exit" + nxL +
+                        "Menu." + nxL +
+                        "0. Create a new item" + nxL +
+                        "1. Find item by Id" + nxL +
+                        "2. Exit" + nxL
+        ));
+    }
 }
