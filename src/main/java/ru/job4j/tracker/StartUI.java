@@ -8,7 +8,6 @@ public class StartUI {
             int select = input.askInt("Select: ");
             UserAction action = actions[select];
             run = action.execute(input, tracker);
-//            System.out.println("!!!! Error! Incorrect menu item selected! !!!!");
         }
 
     }
@@ -24,7 +23,13 @@ public class StartUI {
         Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
         UserAction[] actions = {
-                new CreateAction()
+                new CreateAction(),
+                new ShowAllItems(),
+                new ReplaceAction(),
+                new DeleteAction(),
+                new SearchByID(),
+                new SearchByName(),
+                new ExitAction()
         };
         new StartUI().init(input, tracker, actions);
     }
