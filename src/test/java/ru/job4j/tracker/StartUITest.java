@@ -62,9 +62,6 @@ public class StartUITest {
 
     @Test
     public void whenReplaceItemStubInput() {
-        Input in = new StubInput(
-                new String[]{"0", "1", "New item name", "1"}
-        );
         Tracker tracker = new Tracker();
         Output output = new ConsoleOutput();
         Item item = tracker.add(new Item("Replaced item"));
@@ -72,6 +69,9 @@ public class StartUITest {
                 new ReplaceAction(),
                 new ExitAction()
         };
+        Input in = new StubInput(
+                new String[]{"0", String.valueOf(item.getId()), "New item name", "1"}
+        );
         new StartUI(output).init(in, tracker, actions);
         assertThat(tracker.findAll()[0].getName(), is("New item name"));
     }
