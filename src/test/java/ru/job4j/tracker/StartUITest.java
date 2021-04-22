@@ -78,9 +78,6 @@ public class StartUITest {
 
     @Test
     public void whenDeleteItemStubInput() {
-        Input in = new StubInput(
-                new String[]{"0", "1", "1", "2"}
-        );
         Tracker tracker = new Tracker();
         Output output = new ConsoleOutput();
         Item item = tracker.add(new Item("Deleted item"));
@@ -88,6 +85,9 @@ public class StartUITest {
                 new DeleteAction(),
                 new ExitAction()
         };
+        Input in = new StubInput(
+                new String[]{"0", String.valueOf(item.getId()), "1", "2"}
+        );
         new StartUI(output).init(in, tracker, actions);
         assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
