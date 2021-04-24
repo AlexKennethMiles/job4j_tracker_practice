@@ -24,9 +24,10 @@ public class StartUITest {
     public void whenReplaceItem() {
         Tracker tracker = new Tracker();
         Item item = new Item("new item");
+        Output output = new ConsoleOutput();
         tracker.add(item);
         String[] answers = {String.valueOf(item.getId()), "replace item"};
-        UserAction replaceItem = new ReplaceAction();
+        UserAction replaceItem = new ReplaceAction(output);
         replaceItem.execute(new StubInput(answers), tracker);
         Item replaced = tracker.findById(item.getId());
         assertThat(replaced.getName(), is("replace item"));
@@ -35,15 +36,15 @@ public class StartUITest {
     @Test
     public void whenDeleteItem() {
         Tracker tracker = new Tracker();
+        Output output = new ConsoleOutput();
         Item item = new Item("new item");
         tracker.add(item);
         String[] answers = {String.valueOf(item.getId())};
-        UserAction deleteItem = new DeleteAction();
+        UserAction deleteItem = new DeleteAction(output);
         deleteItem.execute((new StubInput(answers)), tracker);
         Item replaced = tracker.findById(item.getId());
         assertThat(replaced, is(nullValue()));
     }
-
 
     @Test
     public void whenCreateItem() {
@@ -54,7 +55,7 @@ public class StartUITest {
         Output output = new ConsoleOutput();
         UserAction[] actions = {
                 new CreateAction(output),
-                new ExitAction()
+                new ExitAction(output)
         };
         new StartUI(output).init(in, tracker, actions);
         assertThat(tracker.findAll()[0].getName(), is("Item name"));
@@ -66,8 +67,8 @@ public class StartUITest {
         Output output = new ConsoleOutput();
         Item item = tracker.add(new Item("Replaced item"));
         UserAction[] actions = {
-                new ReplaceAction(),
-                new ExitAction()
+                new ReplaceAction(output),
+                new ExitAction(output)
         };
         Input in = new StubInput(
                 new String[]{"0", String.valueOf(item.getId()), "New item name", "1"}
@@ -82,8 +83,8 @@ public class StartUITest {
         Output output = new ConsoleOutput();
         Item item = tracker.add(new Item("Deleted item"));
         UserAction[] actions = {
-                new DeleteAction(),
-                new ExitAction()
+                new DeleteAction(output),
+                new ExitAction(output)
         };
         Input in = new StubInput(
                 new String[]{"0", String.valueOf(item.getId()), "1", "2"}
@@ -100,12 +101,13 @@ public class StartUITest {
         );
         Tracker tracker = new Tracker();
         UserAction[] actions = {
-                new ExitAction()
+                new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
         assertThat(out.toString(), is(
-                "Menu." + System.lineSeparator() +
-                        "0. Exit" + System.lineSeparator()
+                "Menu." + System.lineSeparator()
+                        + "0. Exit" + System.lineSeparator()
+                        + "==== Exit the program ====" + System.lineSeparator()
         ));
     }
 
@@ -113,33 +115,28 @@ public class StartUITest {
     public void whenSearchAll() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[]{"0", "First item", "0", "Second item", "1", "2"}
+                new String[]{"0", "1"}
         );
         Tracker tracker = new Tracker();
+        Item first = new Item("First item");
+        Item second = new Item("Second item");
+        tracker.add(first);
+        tracker.add(second);
         UserAction[] actions = {
-                new CreateAction(out),
-                new ShowAllItems(),
-                new ExitAction()
+                new ShowAllItems(out),
+                new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
         String nxL = System.lineSeparator();
         assertThat(out.toString(), is(
-                "Menu." + nxL +
-                        "0. Create a new item" + nxL +
-                        "1. Show all items" + nxL +
-                        "2. Exit" + nxL +
-                        "Menu." + nxL +
-                        "0. Create a new item" + nxL +
-                        "1. Show all items" + nxL +
-                        "2. Exit" + nxL +
-                        "Menu." + nxL +
-                        "0. Create a new item" + nxL +
-                        "1. Show all items" + nxL +
-                        "2. Exit" + nxL +
-                        "Menu." + nxL +
-                        "0. Create a new item" + nxL +
-                        "1. Show all items" + nxL +
-                        "2. Exit" + nxL
+                "Menu." + nxL
+                        + "0. Show all items" + nxL
+                        + "1. Exit" + nxL
+                        + "==== Showing all items ====" + nxL
+                        + "Menu." + nxL
+                        + "0. Show all items" + nxL
+                        + "1. Exit" + nxL
+                        + "==== Exit the program ====" + nxL
         ));
     }
 
@@ -147,29 +144,26 @@ public class StartUITest {
     public void whenSearchByName() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[]{"0", "New item", "1", "New item", "2"}
+                new String[]{"0", "New item", "1"}
         );
         Tracker tracker = new Tracker();
+        Item item = new Item("New item");
+        tracker.add(item);
         UserAction[] actions = {
-                new CreateAction(out),
-                new SearchByName(),
-                new ExitAction()
+                new SearchByName(out),
+                new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
         String nxL = System.lineSeparator();
         assertThat(out.toString(), is(
-                "Menu." + nxL +
-                        "0. Create a new item" + nxL +
-                        "1. Find items by name" + nxL +
-                        "2. Exit" + nxL +
-                        "Menu." + nxL +
-                        "0. Create a new item" + nxL +
-                        "1. Find items by name" + nxL +
-                        "2. Exit" + nxL +
-                        "Menu." + nxL +
-                        "0. Create a new item" + nxL +
-                        "1. Find items by name" + nxL +
-                        "2. Exit" + nxL
+                "Menu." + nxL
+                        + "0. Find items by name" + nxL
+                        + "1. Exit" + nxL
+                        + "==== Searching for item by name ====" + nxL
+                        + "Menu." + nxL
+                        + "0. Find items by name" + nxL
+                        + "1. Exit" + nxL
+                        + "==== Exit the program ====" + nxL
         ));
     }
 
@@ -177,29 +171,26 @@ public class StartUITest {
     public void whenSearchById() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[]{"0", "New item", "1", "1", "2"}
+                new String[]{"0", "1", "1"}
         );
         Tracker tracker = new Tracker();
+        Item item = new Item("New item");
+        tracker.add(item);
         UserAction[] actions = {
-                new CreateAction(out),
-                new SearchByID(),
-                new ExitAction()
+                new SearchByID(out),
+                new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
         String nxL = System.lineSeparator();
         assertThat(out.toString(), is(
-                "Menu." + nxL +
-                        "0. Create a new item" + nxL +
-                        "1. Find item by Id" + nxL +
-                        "2. Exit" + nxL +
-                        "Menu." + nxL +
-                        "0. Create a new item" + nxL +
-                        "1. Find item by Id" + nxL +
-                        "2. Exit" + nxL +
-                        "Menu." + nxL +
-                        "0. Create a new item" + nxL +
-                        "1. Find item by Id" + nxL +
-                        "2. Exit" + nxL
+                "Menu." + nxL
+                        + "0. Find item by Id" + nxL
+                        + "1. Exit" + nxL
+                        + "==== Searching for item by id ====" + nxL
+                        + "Menu." + nxL
+                        + "0. Find item by Id" + nxL
+                        + "1. Exit" + nxL
+                        + "==== Exit the program ====" + nxL
         ));
     }
 }
