@@ -133,6 +133,8 @@ public class StartUITest {
                         + "0. Show all items" + nxL
                         + "1. Exit" + nxL
                         + "==== Showing all items ====" + nxL
+                        + tracker.findAll()[0].toString() + nxL
+                        + tracker.findAll()[1].toString() + nxL
                         + "Menu." + nxL
                         + "0. Show all items" + nxL
                         + "1. Exit" + nxL
@@ -140,6 +142,7 @@ public class StartUITest {
         ));
     }
 
+    @SuppressWarnings("checkstyle:WhitespaceAround")
     @Test
     public void whenSearchByName() {
         Output out = new StubOutput();
@@ -160,6 +163,7 @@ public class StartUITest {
                         + "0. Find items by name" + nxL
                         + "1. Exit" + nxL
                         + "==== Searching for item by name ====" + nxL
+                        + tracker.findByName("New item")[0] + nxL
                         + "Menu." + nxL
                         + "0. Find items by name" + nxL
                         + "1. Exit" + nxL
@@ -187,6 +191,7 @@ public class StartUITest {
                         + "0. Find item by Id" + nxL
                         + "1. Exit" + nxL
                         + "==== Searching for item by id ====" + nxL
+                        + tracker.findById(1) + nxL
                         + "Menu." + nxL
                         + "0. Find item by Id" + nxL
                         + "1. Exit" + nxL
