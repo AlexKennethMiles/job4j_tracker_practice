@@ -142,7 +142,6 @@ public class StartUITest {
         ));
     }
 
-    @SuppressWarnings("checkstyle:WhitespaceAround")
     @Test
     public void whenSearchByName() {
         Output out = new StubOutput();
