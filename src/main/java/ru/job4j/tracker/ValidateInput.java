@@ -18,14 +18,14 @@ public class ValidateInput implements Input {
     public int askInt(String question) {
         boolean invalid = true;
         int value = -1;
-        do {
+        while (invalid) {
             try {
                 value = in.askInt(question);
                 invalid = false;
             } catch (NumberFormatException nfe) {
                 out.println("Please enter validate data again.");
             }
-        } while (invalid);
+        }
         return value;
     }
 }
