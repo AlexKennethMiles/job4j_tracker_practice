@@ -10,6 +10,9 @@ sudo: false
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
+env:
+  global:
+    - CODECOV_TOKEN=:uuid-repo-token
 # Отправлять уведомление на почту apuchkov17@gmail.com если сборка упала
 notifications:
   email:
