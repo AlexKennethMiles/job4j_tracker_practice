@@ -16,8 +16,12 @@ public class ShowAllItems implements UserAction {
     public boolean execute(Input input, Tracker tracker) {
         output.println("==== Showing all items ====");
         Item[] buf = tracker.findAll();
-        for (Item value : buf) {
-            output.println(value);
+        if (buf.length > 0) {
+            for (Item value : buf) {
+                output.println(value);
+            }
+        } else {
+            output.println("! There are no items in the repository !");
         }
         return true;
     }
