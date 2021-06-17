@@ -143,6 +143,32 @@ public class StartUITest {
     }
 
     @Test
+    public void whenSearchNothing() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[]{"0", "1"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new ShowAllItems(out),
+                new ExitAction(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String nxL = System.lineSeparator();
+        assertThat(out.toString(), is(
+                "Menu." + nxL
+                        + "0. Show all items" + nxL
+                        + "1. Exit" + nxL
+                        + "==== Showing all items ====" + nxL
+                        + "! There are no items in the repository !" + nxL
+                        + "Menu." + nxL
+                        + "0. Show all items" + nxL
+                        + "1. Exit" + nxL
+                        + "==== Exit the program ====" + nxL
+        ));
+    }
+
+    @Test
     public void whenSearchByName() {
         Output out = new StubOutput();
         Input in = new StubInput(
