@@ -8,7 +8,9 @@ public class PriorityQueue {
     public void put(Task task) {
         int index = 0;
         for (Task el : tasks) {
-            if (task.getPriority() > el.getPriority()) {
+            if (el.getPriority() > task.getPriority()) {
+                break;
+            } else if (task.getPriority() > el.getPriority()) {
                 index++;
             }
         }
