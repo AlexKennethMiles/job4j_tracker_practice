@@ -44,4 +44,12 @@ public class PriorityQueueTest {
         result = queue.take();
         assertThat(result, is(nullValue()));
     }
+
+    @Test
+    public void whenUnusualPriority() {
+        PriorityQueue queue = new PriorityQueue();
+        queue.put(new Task("negative", -321));
+        Task result = queue.take();
+        assertThat(result.getDesc(), is("negative"));
+    }
 }
