@@ -25,12 +25,12 @@ public class PriorityQueueTest {
     public void whenEqualPriority() {
         PriorityQueue queue = new PriorityQueue();
         queue.put(new Task("first", 2));
+        queue.put(new Task("second", 2));
+        queue.put(new Task("third", 2));
         Task result = queue.take();
         assertThat(result.getDesc(), is("first"));
-        queue.put(new Task("second", 2));
         result = queue.take();
         assertThat(result.getDesc(), is("second"));
-        queue.put(new Task("third", 2));
         result = queue.take();
         assertThat(result.getDesc(), is("third"));
     }
