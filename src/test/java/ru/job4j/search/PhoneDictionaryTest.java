@@ -25,7 +25,7 @@ public class PhoneDictionaryTest {
         phoneDictionary.add(
                 new Person("Ivan", "Sidorov", "", "Odessa")
         );
-        ArrayList<Person> result = phoneDictionary.find("Sidorov");
+        ArrayList<Person> result = phoneDictionary.find("dorov");
         assertThat(result.get(0).getSurname(), is("Sidorov"));
     }
 
@@ -35,7 +35,7 @@ public class PhoneDictionaryTest {
         phoneDictionary.add(
                 new Person("Adnrey", "Kolobkov", "7812", "Saint-Petersburg")
         );
-        ArrayList<Person> result = phoneDictionary.find("7812");
+        ArrayList<Person> result = phoneDictionary.find("812");
         assertThat(result.get(0).getPhone(), is("7812"));
     }
 
@@ -45,7 +45,7 @@ public class PhoneDictionaryTest {
         phoneDictionary.add(
                 new Person("Alexander", "Morozov", "7383", "Novosibirsk")
         );
-        ArrayList<Person> result = phoneDictionary.find("Novosibirsk");
+        ArrayList<Person> result = phoneDictionary.find("sibirsk");
         assertThat(result.get(0).getAddress(), is("Novosibirsk"));
     }
 
