@@ -35,6 +35,11 @@ public class ConvertListTest {
     public void whenEmptyList() {
         List<int[]> in = new ArrayList<>();
         in.add(new int[]{});
+        in.add(new int[]{});
+        in.add(new int[]{});
+        in.add(new int[]{});
+        in.add(new int[]{});
+        in.add(new int[]{});
         List<Integer> expect = Arrays.asList();
         assertThat(ConvertList.convert(in), is(expect));
     }
