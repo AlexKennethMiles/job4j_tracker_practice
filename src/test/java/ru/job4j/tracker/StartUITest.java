@@ -2,6 +2,9 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.*;
@@ -53,10 +56,10 @@ public class StartUITest {
         );
         Tracker tracker = new Tracker();
         Output output = new ConsoleOutput();
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new CreateAction(output),
                 new ExitAction(output)
-        };
+        );
         new StartUI(output).init(input, tracker, actions);
         assertThat(tracker.findAll()[0].getName(), is("Item name"));
     }
@@ -66,10 +69,10 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Output output = new ConsoleOutput();
         Item item = tracker.add(new Item("Replaced item"));
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new ReplaceAction(output),
                 new ExitAction(output)
-        };
+        );
         Input input = new StubInput(
                 new String[]{"0", String.valueOf(item.getId()), "New item name", "1"}
         );
@@ -82,10 +85,10 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Output output = new StubOutput();
         tracker.add(new Item("Replaced item"));
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new ReplaceAction(output),
                 new ExitAction(output)
-        };
+        );
         Input input = new StubInput(
                 new String[]{"0", "123", "1234", "1"}
         );
@@ -109,10 +112,10 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Output output = new ConsoleOutput();
         Item item = tracker.add(new Item("Deleted item"));
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new DeleteAction(output),
                 new ExitAction(output)
-        };
+        );
         Input input = new StubInput(
                 new String[]{"0", String.valueOf(item.getId()), "1"}
         );
@@ -128,10 +131,10 @@ public class StartUITest {
         Input input = new StubInput(
                 new String[]{"0", "123", "1"}
         );
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new DeleteAction(output),
                 new ExitAction(output)
-        };
+        );
         new StartUI(output).init(input, tracker, actions);
         String nxL = System.lineSeparator();
         assertThat(output.toString(), is(
@@ -154,9 +157,9 @@ public class StartUITest {
                 new String[]{"0"}
         );
         Tracker tracker = new Tracker();
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new ExitAction(output)
-        };
+        );
         new StartUI(output).init(input, tracker, actions);
         String nxL = System.lineSeparator();
         assertThat(output.toString(), is(
@@ -177,10 +180,10 @@ public class StartUITest {
         Item second = new Item("Second item");
         tracker.add(first);
         tracker.add(second);
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new ShowAllItems(output),
                 new ExitAction(output)
-        };
+        );
         new StartUI(output).init(input, tracker, actions);
         String nxL = System.lineSeparator();
         assertThat(output.toString(), is(
@@ -204,10 +207,10 @@ public class StartUITest {
                 new String[]{"0", "1"}
         );
         Tracker tracker = new Tracker();
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new ShowAllItems(output),
                 new ExitAction(output)
-        };
+        );
         new StartUI(output).init(input, tracker, actions);
         String nxL = System.lineSeparator();
         assertThat(output.toString(), is(
@@ -232,10 +235,10 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("New item");
         tracker.add(item);
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new SearchByName(output),
                 new ExitAction(output)
-        };
+        );
         new StartUI(output).init(input, tracker, actions);
         String nxL = System.lineSeparator();
         assertThat(output.toString(), is(
@@ -258,10 +261,10 @@ public class StartUITest {
                 new String[]{"0", "0", "1"}
         );
         Tracker tracker = new Tracker();
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new SearchByName(output),
                 new ExitAction(output)
-        };
+        );
         new StartUI(output).init(input, tracker, actions);
         String nxL = System.lineSeparator();
         assertThat(output.toString(), is(
@@ -286,10 +289,10 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("New item");
         tracker.add(item);
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new SearchByID(output),
                 new ExitAction(output)
-        };
+        );
         new StartUI(output).init(input, tracker, actions);
         String nxL = System.lineSeparator();
         assertThat(output.toString(), is(
@@ -312,10 +315,10 @@ public class StartUITest {
                 new String[]{"0", "0", "1"}
         );
         Tracker tracker = new Tracker();
-        UserAction[] actions = {
+        List<UserAction> actions = Arrays.asList(
                 new SearchByID(output),
                 new ExitAction(output)
-        };
+        );
         new StartUI(output).init(input, tracker, actions);
         String nxL = System.lineSeparator();
         assertThat(output.toString(), is(
@@ -338,9 +341,9 @@ public class StartUITest {
                 new String[]{"1", "0"}
         );
         Tracker tracker = new Tracker();
-        UserAction[] actions = new UserAction[]{
+        List<UserAction> actions = Arrays.asList(
                 new ExitAction(output)
-        };
+        );
         new StartUI(output).init(input, tracker, actions);
         String nxL = System.lineSeparator();
         assertThat(output.toString(), is(
