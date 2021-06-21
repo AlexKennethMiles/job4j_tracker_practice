@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-import javax.swing.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

@@ -18,7 +18,7 @@ public class StartUITest {
         Output output = new ConsoleOutput();
         UserAction createItem = new CreateAction(output);
         createItem.execute(input, tracker);
-        Item created = tracker.findAll()[0];
+        Item created = tracker.findAll().get(0);
         Item expected = new Item("Fix PC");
         assertThat(created.getName(), is(expected.getName()));
     }
@@ -61,7 +61,7 @@ public class StartUITest {
                 new ExitAction(output)
         );
         new StartUI(output).init(input, tracker, actions);
-        assertThat(tracker.findAll()[0].getName(), is("Item name"));
+        assertThat(tracker.findAll().get(0).getName(), is("Item name"));
     }
 
     @Test
@@ -77,7 +77,7 @@ public class StartUITest {
                 new String[]{"0", String.valueOf(item.getId()), "New item name", "1"}
         );
         new StartUI(output).init(input, tracker, actions);
-        assertThat(tracker.findAll()[0].getName(), is("New item name"));
+        assertThat(tracker.findAll().get(0).getName(), is("New item name"));
     }
 
     @Test
