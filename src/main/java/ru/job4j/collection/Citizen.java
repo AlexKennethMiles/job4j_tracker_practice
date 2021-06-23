@@ -28,11 +28,20 @@ public class Citizen {
             return false;
         }
         Citizen citizen = (Citizen) obj;
-        return Objects.equals(passport, citizen.getPassport());
+        return Objects.equals(passport, citizen.getPassport())
+                && Objects.equals(username, citizen.getUsername());
     }
 
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Citizen{"
+                + "passport='" + passport + '\''
+                + ", username='" + username + '\''
+                + '}';
     }
 }

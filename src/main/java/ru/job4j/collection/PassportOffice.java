@@ -14,8 +14,15 @@ public class PassportOffice {
         return rsl;
     }
 
-    public Citizen get (String key) {
+    public Citizen get(String key) {
         return citizens.get(key);
+    }
+
+    @Override
+    public String toString() {
+        return "PassportOffice{"
+                + "citizens=" + citizens
+                + '}';
     }
 
 }
