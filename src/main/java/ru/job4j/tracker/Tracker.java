@@ -59,4 +59,8 @@ public class Tracker {
         int index = indexOf(id);
         return index != -1 ? items.get(index) : null;
     }
+
+    public List<Item> getItems() {
+        return items;
+    }
 }
