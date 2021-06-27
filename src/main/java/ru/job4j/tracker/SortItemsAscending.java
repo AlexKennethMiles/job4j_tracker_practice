@@ -2,11 +2,9 @@ package ru.job4j.tracker;
 
 import java.util.Comparator;
 
-public class SortItemsAscending implements Comparator {
+public class SortItemsAscending implements Comparator<Item> {
     @Override
-    public int compare(Object o1, Object o2) {
-        Item first = (Item) o1;
-        Item second = (Item) o2;
+    public int compare(Item first, Item second) {
         return first.getId() - second.getId();
     }
 }

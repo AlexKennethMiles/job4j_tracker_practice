@@ -45,22 +45,17 @@ public class TrackerTest {
 
     @Test
     public void whenComparator() {
-        Tracker tracker = new Tracker();
-        Item first = new Item("First");
-        Item second = new Item("Second");
-        Item third = new Item("Third");
-        Item fourth = new Item("Fourth");
-        Item fifth = new Item("Fifth");
-        tracker.add(first);
-        tracker.add(second);
-        tracker.add(third);
-        tracker.add(fourth);
-        tracker.add(fifth);
-        Collections.sort(tracker.getItems(), new SortItemsDecreasing());
+        Item first = new Item(1, "First");
+        Item second = new Item(2, "Second");
+        Item third = new Item(3, "Third");
+        Item fourth = new Item(4, "Fourth");
+        Item fifth = new Item(5, "Fifth");
+        List<Item> list = new ArrayList<>(Arrays.asList(first, second, third, fourth, fifth));
+        Collections.sort(list, new SortItemsDecreasing());
         List<Item> decreasingItems = new ArrayList<>(Arrays.asList(fifth, fourth, third, second, first));
-        assertThat(tracker.getItems(), is(decreasingItems));
+        assertThat(list, is(decreasingItems));
         List<Item> ascendingSort = new ArrayList<>(Arrays.asList(first, second, third, fourth, fifth));
-        Collections.sort(tracker.getItems(), new SortItemsAscending());
-        assertThat(tracker.getItems(), is(ascendingSort));
+        Collections.sort(list, new SortItemsAscending());
+        assertThat(list, is(ascendingSort));
     }
 }
