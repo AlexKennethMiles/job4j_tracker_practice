@@ -23,4 +23,20 @@ public class LexSortTest {
         Arrays.sort(input, new LexSort());
         assertThat(input, is(out));
     }
+
+    @Test
+    public void sortDuplicateNum() {
+        String[] input = {
+                "3. Task.",
+                "3. Conditions and task.",
+                "3. Addition to the task."
+        };
+        String[] out = {
+                "3. Task.",
+                "3. Conditions and task.",
+                "3. Addition to the task."
+        };
+        Arrays.sort(input, new LexSort());
+        assertThat(input, is(out));
+    }
 }
