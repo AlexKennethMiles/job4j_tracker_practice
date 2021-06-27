@@ -44,7 +44,7 @@ public class TrackerTest {
     }
 
     @Test
-    public void whenComparator() {
+    public void whenComparatorSortItemsDecreasing() {
         Item first = new Item(1, "First");
         Item second = new Item(2, "Second");
         Item third = new Item(3, "Third");
@@ -54,6 +54,16 @@ public class TrackerTest {
         Collections.sort(list, new SortItemsDecreasing());
         List<Item> decreasingItems = new ArrayList<>(Arrays.asList(fifth, fourth, third, second, first));
         assertThat(list, is(decreasingItems));
+    }
+
+    @Test
+    public void whenComparatorSortItemsAscending() {
+        Item first = new Item(1, "First");
+        Item second = new Item(2, "Second");
+        Item third = new Item(3, "Third");
+        Item fourth = new Item(4, "Fourth");
+        Item fifth = new Item(5, "Fifth");
+        List<Item> list = new ArrayList<>(Arrays.asList(third, fifth, fourth, first, second));
         List<Item> ascendingSort = new ArrayList<>(Arrays.asList(first, second, third, fourth, fifth));
         Collections.sort(list, new SortItemsAscending());
         assertThat(list, is(ascendingSort));
