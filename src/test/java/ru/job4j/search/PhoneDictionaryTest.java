@@ -49,7 +49,6 @@ public class PhoneDictionaryTest {
         assertThat(result.get(0).getAddress(), is("Novosibirsk"));
     }
 
-
     @Test
     public void whenNotFind() {
         PhoneDictionary phoneDictionary = new PhoneDictionary();
