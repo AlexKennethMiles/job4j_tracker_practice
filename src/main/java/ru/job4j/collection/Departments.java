@@ -8,13 +8,12 @@ public class Departments {
         for (String value : deps) {
             StringBuilder start = new StringBuilder();
             for (String el : value.split("/")) {
-                if (el.equals(value.split("/")[0])) {
-                    tmp.add(el);
+                if (start.isEmpty()) {
                     start.append(el);
                 } else {
-                    tmp.add(start + "/" + el);
                     start.append("/").append(el);
                 }
+                tmp.add(start.toString());
             }
         }
         return new ArrayList<>(tmp);
