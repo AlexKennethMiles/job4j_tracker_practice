@@ -26,7 +26,6 @@ public class FunctionalInterfaces {
         }
 
         Supplier<List<String>> sup = () -> new ArrayList<>(map.values());
-//        List<String> strings = new ArrayList<>(map.values());
 
         Consumer<String> con = s -> System.out.println(s);
         Function<String, String> func = s -> s.toUpperCase();
