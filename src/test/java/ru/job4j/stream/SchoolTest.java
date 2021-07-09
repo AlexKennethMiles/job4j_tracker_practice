@@ -83,7 +83,7 @@ public class SchoolTest {
         School sc = new School();
         Predicate<Student> predicate =
                 student -> student.getScore() > 0
-                        && student.getScore() < 100;
+                        && student.getScore() <= 100;
         List<Student> rsl = sc.collect(students, predicate);
         List<Student> expected = new ArrayList<>();
         assertThat(rsl, is(expected));
