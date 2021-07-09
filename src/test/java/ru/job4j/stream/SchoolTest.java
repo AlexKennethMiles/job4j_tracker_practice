@@ -70,4 +70,22 @@ public class SchoolTest {
         expected.add(new Student(40, "Surname4"));
         assertThat(rsl, is(expected));
     }
+
+    @Test
+    public void whenIncorrectStudents() {
+        List<Student> students = List.of(
+                new Student(-40, "Surname8"),
+                new Student(450, "Surname3"),
+                new Student(101, "Surname2"),
+                new Student(-70, "Surname6"),
+                new Student(0, "Surname0")
+        );
+        School sc = new School();
+        Predicate<Student> predicate =
+                student -> student.getScore() > 0
+                        && student.getScore() < 100;
+        List<Student> rsl = sc.collect(students, predicate);
+        List<Student> expected = new ArrayList<>();
+        assertThat(rsl, is(expected));
+    }
 }
