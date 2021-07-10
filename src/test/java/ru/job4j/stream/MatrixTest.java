@@ -10,11 +10,11 @@ import static org.junit.Assert.*;
 public class MatrixTest {
     @Test
     public void simpleConvertMatrixToList() {
-        List<List<Integer>> matrix = List.of(
-                List.of(1, 2),
-                List.of(3),
-                List.of(4, 5, 6)
-        );
+        Integer[][] matrix = new Integer[][]{
+                {1, 2},
+                {3},
+                {4, 5, 6}
+        };
         Matrix machine = new Matrix();
         List<Integer> expected = List.of(1, 2, 3, 4, 5, 6);
         assertThat(machine.convertMatrixToList(matrix), is(expected));
@@ -22,9 +22,9 @@ public class MatrixTest {
 
     @Test
     public void whenEmptyMatrix() {
-        List<List<Integer>> matrix = List.of(
-                List.of()
-        );
+        Integer[][] matrix = new Integer[][]{
+                {}
+        };
         Matrix machine = new Matrix();
         List<Integer> expected = List.of();
         assertThat(machine.convertMatrixToList(matrix), is(expected));
