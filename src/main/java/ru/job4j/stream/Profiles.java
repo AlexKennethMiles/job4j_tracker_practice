@@ -8,13 +8,8 @@ public class Profiles {
     public List<Address> collect(List<Profile> profiles) {
         return profiles.stream()
                 .map(Profile::getAddress)
+                .sorted(Comparator.comparing(Address::getCity))
                 .distinct()
-                .sorted(new Comparator<Address>() {
-                    @Override
-                    public int compare(Address o1, Address o2) {
-                        return o1.getCity().compareTo(o2.getCity());
-                    }
-                })
                 .collect(Collectors.toList());
     }
 }
