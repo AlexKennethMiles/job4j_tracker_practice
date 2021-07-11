@@ -42,30 +42,33 @@ public class BankService {
 
     /**
      * Метод производит поиск пользователя в текущей HashMap
-     * на основе переданного паспорта. Получив список всех
-     * пользователей через keySet(), метод просматривает поле passport
-     * у каждого пользователя и возвращает того, где нашел совпадение
-     * с переданным паспортом. В противном случае возвращает null.
+     * на основе переданного паспорта. Получив коллекцию Set всех
+     * пользователей через keySet(), запускается поток существующих
+     * в базе пользователей класса User, после чего поток фильтруется
+     * на основании совпадения поля passport конкретного пользователя
+     * и паспорта, переданного в аргументе метода. Если происходит
+     * совпадение, то метод возвращает объект User, на котором оно произошло.
+     * В противном случае возвращает null.
      *
      * @param passport номер паспорта, по которому надо найти пользователя
      * @return возвращает найденного пользователя
      * или null, если пользователь не найден
      */
     public User findByPassport(String passport) {
-        for (User user : users.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                return user;
-            }
-        }
-        return null;
+        return users.keySet()
+                .stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
      * Метод производит поиск счёта по паспорту пользователя
-     * и номером искомого счёта. Если пользователь найден,
-     * производится перебор его счётов. В случае совпадения с переданным,
-     * возвращается объект класса Account, который закреплен за пользователем
-     * в HashMap. В противном случае возвращает null.
+     * и номером искомого счёта. Если пользователь по паспорту найден,
+     * то запускается поток из элементов коллекции Account, которые
+     * закреплены за этим пользователем. В случае совпадения с переданным
+     * в аргументе метода счётом, метод возвращает объект класса Account,
+     * на котором произошло совпадение. В противном случае возвращает null.
      *
      * @param passport  номер паспорта пользователя, у которого производится
      *                  поиск нужного счёта
@@ -75,11 +78,11 @@ public class BankService {
     public Account findByRequisite(String passport, String requisite) {
         User user = findByPassport(passport);
         if (user != null) {
-            for (Account account : users.get(user)) {
-                if (requisite.equals(account.getRequisite())) {
-                    return account;
-                }
-            }
+            return users.get(user)
+                    .stream()
+                    .filter(r -> r.getRequisite().equals(requisite))
+                    .findFirst()
+                    .orElse(null);
         }
         return null;
     }
