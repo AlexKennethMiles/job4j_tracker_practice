@@ -2,7 +2,6 @@ package ru.job4j.stream;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -20,10 +19,11 @@ public class ProfilesTest {
                         new Address("Lyon", "rue Peyrat", 8, 1))
         );
         Profiles prof = new Profiles();
-        List<Address> expected = new ArrayList<>();
-        expected.add(new Address("London", "Baker Street", 221, 2));
-        expected.add(new Address("Lyon", "rue Peyrat", 8, 1));
-        expected.add(new Address("Moscow", "Bolshaya Sadovaya ulitsa", 10, 50));
+        List<Address> expected = List.of(
+                new Address("London", "Baker Street", 221, 2),
+                new Address("Lyon", "rue Peyrat", 8, 1),
+                new Address("Moscow", "Bolshaya Sadovaya ulitsa", 10, 50)
+        );
         assertThat(prof.collect(profiles), is(expected));
     }
 
@@ -42,10 +42,11 @@ public class ProfilesTest {
                         new Address("Lyon", "rue Peyrat", 8, 1))
         );
         Profiles prof = new Profiles();
-        List<Address> expected = new ArrayList<>();
-        expected.add(new Address("London", "Baker Street", 221, 2));
-        expected.add(new Address("Lyon", "rue Peyrat", 8, 1));
-        expected.add(new Address("Moscow", "Bolshaya Sadovaya ulitsa", 10, 50));
+        List<Address> expected = List.of(
+                new Address("London", "Baker Street", 221, 2),
+                new Address("Lyon", "rue Peyrat", 8, 1),
+                new Address("Moscow", "Bolshaya Sadovaya ulitsa", 10, 50)
+        );
         assertThat(prof.collect(profiles), is(expected));
     }
 }
