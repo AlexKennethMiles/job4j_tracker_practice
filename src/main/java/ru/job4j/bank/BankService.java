@@ -21,26 +21,6 @@ public class BankService {
     }
 
     /**
-     * Метод добавляет к списку счётов пользователя новый счёт,
-     * если пользователь с таким паспортом есть в базе
-     * и на момент добавления добавляемый счет является уникальным
-     * для списка счётов пользователя.
-     *
-     * @param passport номер паспорта, по которому надо найти пользователя
-     * @param account  счёт, который надо добавить к списку List счётов,
-     *                 найденного пользователя
-     */
-    public void addAccount(String passport, Account account) {
-        User user = findByPassport(passport);
-        if (user != null) {
-            List<Account> accounts = users.get(user);
-            if (!accounts.contains(account)) {
-                accounts.add(account);
-            }
-        }
-    }
-
-    /**
      * Метод производит поиск пользователя в текущей HashMap
      * на основе переданного паспорта. Получив коллекцию Set всех
      * пользователей через keySet(), запускается поток существующих
@@ -54,12 +34,31 @@ public class BankService {
      * @return возвращает найденного пользователя
      * или null, если пользователь не найден
      */
-    public User findByPassport(String passport) {
+    public Optional<User> findByPassport(String passport) {
         return users.keySet()
                 .stream()
                 .filter(user -> user.getPassport().equals(passport))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
+    }
+
+    /**
+     * Метод добавляет к списку счётов пользователя новый счёт,
+     * если пользователь с таким паспортом есть в базе
+     * и на момент добавления добавляемый счет является уникальным
+     * для списка счётов пользователя.
+     *
+     * @param passport номер паспорта, по которому надо найти пользователя
+     * @param account  счёт, который надо добавить к списку List счётов,
+     *                 найденного пользователя
+     */
+    public void addAccount(String passport, Account account) {
+        Optional<User> user = findByPassport(passport);
+        if (user.isPresent()) {
+            List<Account> accounts = users.get(user.get());
+            if (!accounts.contains(account)) {
+                accounts.add(account);
+            }
+        }
     }
 
     /**
@@ -75,16 +74,12 @@ public class BankService {
      * @param requisite номер искомого счёта
      * @return возвращает найденный счёт или null, если счёт не найден
      */
-    public Account findByRequisite(String passport, String requisite) {
-        User user = findByPassport(passport);
-        if (user != null) {
-            return users.get(user)
-                    .stream()
-                    .filter(r -> r.getRequisite().equals(requisite))
-                    .findFirst()
-                    .orElse(null);
-        }
-        return null;
+    public Optional<Account> findByRequisite(String passport, String requisite) {
+        Optional<User> user = findByPassport(passport);
+        return user.flatMap(value -> users.get(value)
+                .stream()
+                .filter(r -> r.getRequisite().equals(requisite))
+                .findFirst());
     }
 
     /**
@@ -110,11 +105,11 @@ public class BankService {
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         boolean rsl = false;
-        Account fromAcc = findByRequisite(srcPassport, srcRequisite);
-        Account toAcc = findByRequisite(destPassport, destRequisite);
-        if (fromAcc != null && toAcc != null && fromAcc.getBalance() >= amount) {
-            fromAcc.setBalance(fromAcc.getBalance() - amount);
-            toAcc.setBalance(toAcc.getBalance() + amount);
+        Optional<Account> fromAcc = findByRequisite(srcPassport, srcRequisite);
+        Optional<Account> toAcc = findByRequisite(destPassport, destRequisite);
+        if (fromAcc.isPresent() && toAcc.isPresent() && fromAcc.get().getBalance() >= amount) {
+            fromAcc.get().setBalance(fromAcc.get().getBalance() - amount);
+            toAcc.get().setBalance(toAcc.get().getBalance() + amount);
             rsl = true;
 
         }
