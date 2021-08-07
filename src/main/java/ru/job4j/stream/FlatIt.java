@@ -6,16 +6,12 @@ import java.util.List;
 
 public class FlatIt {
     public static List<Integer> flatten(Iterator<Iterator<Integer>> it) {
-        List<Iterator<Integer>> buf = new ArrayList<>();
-        while (it.hasNext()) {
-            buf.add(it.next());
-        }
         List<Integer> res = new ArrayList<>();
-        for (Iterator<Integer> integerIterator : buf) {
-            while (integerIterator.hasNext()) {
-                res.add(integerIterator.next());
-            }
-        }
+        it.forEachRemaining(
+                externalIterator -> externalIterator.forEachRemaining(
+                        nestedIterator -> res.add(nestedIterator)
+                )
+        );
         return res;
     }
 }
