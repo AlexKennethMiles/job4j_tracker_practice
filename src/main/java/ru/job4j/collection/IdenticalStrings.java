@@ -1,26 +1,15 @@
 package ru.job4j.collection;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class IdenticalStrings {
     public static boolean eq(String left, String right) {
-        char[] leftChars = left.toCharArray();
-        char[] rightChars = right.toCharArray();
-        Map<Character, Integer> leftMap = new HashMap<>();
-        Map<Character, Integer> rightMap = new HashMap<>();
-        for (char leftChar : leftChars) {
-            Integer added = leftMap.putIfAbsent(leftChar, 1);
-            if (added != null) {
-                leftMap.computeIfPresent(leftChar, (k, v) -> v + 1);
-            }
-        }
-        for (char rightChar : rightChars) {
-            Integer added = rightMap.putIfAbsent(rightChar, 1);
-            if (added != null) {
-                rightMap.computeIfPresent(rightChar, (k, v) -> v + 1);
-            }
-        }
+        Map<String, Long> leftMap = left.chars().mapToObj(c -> Character.toString((char) c))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        Map<String, Long> rightMap = right.chars().mapToObj(c -> Character.toString((char) c))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         return leftMap.equals(rightMap);
     }
 }
