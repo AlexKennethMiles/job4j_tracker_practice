@@ -2,8 +2,6 @@ package ru.job4j.io;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
-import java.util.StringJoiner;
 
 public class Shell {
     private Deque<String> deque = new ArrayDeque<>();
