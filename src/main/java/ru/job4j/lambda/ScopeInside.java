@@ -11,7 +11,7 @@ public class ScopeInside {
                     () -> value
             );
         }
-        System.out.println(rsl); // 10
+        System.out.println(rsl);
     }
 
     private static Integer add(Supplier<Integer> calc) {
