@@ -87,11 +87,7 @@ public class SqlTracker implements Store, AutoCloseable {
                      cn.createStatement()) {
             ResultSet rs = statement.executeQuery("select * from items");
             while (rs.next()) {
-                rsl.add(new Item(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getTimestamp("created").toLocalDateTime())
-                );
+                rsl.add(getItemFromResultSet(rs));
             }
         } catch (SQLException throwable) {
             throwable.printStackTrace();
@@ -107,11 +103,7 @@ public class SqlTracker implements Store, AutoCloseable {
             statement.setString(1, key);
             try (ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
-                    rsl.add(new Item(
-                            rs.getInt("id"),
-                            rs.getString("name"),
-                            rs.getTimestamp("created").toLocalDateTime())
-                    );
+                    rsl.add(getItemFromResultSet(rs));
                 }
             }
         } catch (SQLException throwable) {
@@ -128,13 +120,23 @@ public class SqlTracker implements Store, AutoCloseable {
             statement.setInt(1, id);
             try (ResultSet rs = statement.executeQuery()) {
                 if (rs.next()) {
-                    item = new Item(
-                            rs.getInt(1),
-                            rs.getString(2),
-                            rs.getTimestamp("created").toLocalDateTime()
-                    );
+                    item = getItemFromResultSet(rs);
                 }
             }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return item;
+    }
+
+    public Item getItemFromResultSet(ResultSet rs) {
+        Item item = null;
+        try {
+            item = new Item(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getTimestamp("created").toLocalDateTime()
+            );
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
