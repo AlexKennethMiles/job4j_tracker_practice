@@ -9,6 +9,13 @@ import java.util.Properties;
 public class SqlTracker implements Store, AutoCloseable {
     private Connection cn;
 
+    public SqlTracker() {
+    }
+
+    public SqlTracker(Connection connection) {
+        this.cn = connection;
+    }
+
     public void init() {
         try (InputStream in = SqlTracker.class
                 .getClassLoader()
@@ -99,8 +106,8 @@ public class SqlTracker implements Store, AutoCloseable {
     public List<Item> findByName(String key) {
         List<Item> rsl = new ArrayList<>();
         try (PreparedStatement statement =
-                     cn.prepareStatement("select * from items where name=?")) {
-            statement.setString(1, key);
+                     cn.prepareStatement("select * from items where name like ?")) {
+            statement.setString(1, '%' + key + '%');
             try (ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
                     rsl.add(getItemFromResultSet(rs));
