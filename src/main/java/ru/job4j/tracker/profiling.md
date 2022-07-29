@@ -1,5 +1,5 @@
 ## Улититы jps, jmap, jstat
-* ####jps + jmap
+* **jps + jmap**
 
 Вывод `jmap -histo <pid>` до заполнения памяти заявками:
 ![jmap1](https://i2.paste.pics/HUTWT.png)
@@ -15,7 +15,7 @@
 Операции в консольном приложении между вызовами утилит:
 ![jmap_console](https://i2.paste.pics/HUTWV.png)
 
-* ####jps + jstat
+* **jps + jstat**
 
 Утилита вызвалась в начале работы приложения,
 затем были созданы 250000 экземпляров Item,
@@ -28,7 +28,7 @@
 
 ![jstat](https://i2.paste.pics/HUTWW.png)
 
-* ####jconsole
+* **jconsole**
 Порядок действий:
 1. Создание 250000 экземпляров `ru.job4j.tracker.Item`
 2. Вывод всех экземпляров в консоль
@@ -63,7 +63,7 @@
 Метод *indesOf()* класса `ru.job4j.tracker.MemTracker`:
 ![](https://i2.paste.pics/HUWPP.png)
 
-* ####Ситуация переполнения heap'а
+* **Ситуация переполнения heap'а**
 
 Детали ввода консоли:
 ![out_console](https://i2.paste.pics/HV3J9.png)
