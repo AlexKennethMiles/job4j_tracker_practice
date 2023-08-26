@@ -21,7 +21,7 @@ public class ReplaceAction implements UserAction {
         if (tracker.replace(id, item)) {
             output.println("+++ The change was successful +++");
         } else {
-            output.println("!!! The change failed !!! ");
+            output.println("!!! The change failed !!!");
         }
         return true;
     }

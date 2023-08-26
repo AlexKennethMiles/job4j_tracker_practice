@@ -99,7 +99,7 @@ public class StartUITest {
                         + "0. Edit item" + nxL
                         + "1. Exit" + nxL
                         + "==== Update the item ====" + nxL
-                        + "!!! The change failed !!! " + nxL
+                        + "!!! The change failed !!!" + nxL
                         + "Menu." + nxL
                         + "0. Edit item" + nxL
                         + "1. Exit" + nxL
